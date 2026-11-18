@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="bg">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176b45">
+  <meta name="description" content="Лавка — свежи продукти и любими стоки за всеки ден.">
+  <title>Лавка — свежо и близо до теб</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="announcement">🚲 Безплатна доставка над 60 лв. · Поръчай до 18:00 ч.</div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Лавка — начало"><span class="brand-mark">Л</span><span>лавка<span class="brand-dot">.</span><small>свежо и близо до теб</small></span></a>
+    <label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Какво търсиш днес?" aria-label="Търси продукти"><kbd>⌘ K</kbd></label>
+    <div class="header-actions"><a class="help-link" href="#footer">Помощ</a><button class="cart-trigger" id="open-cart" aria-label="Отвори количката">🛍️ <span>Количка</span><b id="cart-count">0</b></button></div>
+  </header>
+  <main id="home">
+    <section class="hero page-width">
+      <div class="hero-copy"><span class="eyebrow">ТВОЯТА КВАРТАЛНА ЛАВКА, СЕГА ОНЛАЙН</span><h1>Хубавите неща<br>са <em>съвсем близо.</em></h1><p>Свежи плодове, любими находки и всичко за дома — подбрано с грижа и доставено до вратата ти.</p><a class="primary-button" href="#products">Разгледай продуктите <span>→</span></a><div class="hero-note"><span class="avatar-stack"><i>👩🏻</i><i>👨🏽</i><i>👩🏾</i></span><span><strong>Съседите вече пазаруват</strong><small>Малки покупки, голямо удобство.</small></span></div></div>
+      <div class="hero-art" aria-label="Илюстрация на кошница с пресни продукти"><div class="sun-shape"></div><div class="floating-tag">🌱 Винаги свежо</div><div class="produce-card"><span class="produce-emoji">🥑🍋🥖🍅</span><span class="produce-label">ДОБРОТО Е<br>В КОШНИЦАТА</span></div><div class="hero-sticker">от квартала<br>с любов <b>♥</b></div></div>
+    </section>
+    <section class="category-section page-width" aria-label="Категории"><div class="section-heading"><div><span class="eyebrow">НАМЕРИ СВОЕТО</span><h2>Пазарувай по категория</h2></div><a href="#products" class="text-link">Всички продукти →</a></div><div class="category-list" id="category-list"></div></section>
+    <section class="products-section page-width" id="products"><div class="section-heading product-heading"><div><span class="eyebrow">ПОДБРАНО ЗА ТЕБ</span><h2>Любими от квартала <span>✳</span></h2></div><label class="sort-label">Подреди по <select id="sort-select" aria-label="Подреди продуктите"><option value="featured">Популярност</option><option value="price-asc">Цена: ниска към висока</option><option value="price-desc">Цена: висока към ниска</option></select></label></div><div class="active-filter" id="active-filter"></div><div class="product-grid" id="product-grid" aria-live="polite"></div><p class="empty-state hidden" id="empty-state">Не намерихме продукти. Опитай с друга дума. 🌼</p></section>
+    <section class="promise-strip page-width"><div>🥬 <span><b>Свежо всеки ден</b><small>Подбрано с грижа</small></span></div><div>🛵 <span><b>До твоята врата</b><small>В удобно за теб време</small></span></div><div>💚 <span><b>Подкрепи квартала</b><small>Пазарувай близо до дома</small></span></div></section>
+  </main>
+  <footer id="footer"><div class="footer-inner page-width"><a class="brand footer-brand" href="#home"><span class="brand-mark">Л</span><span>лавка<span class="brand-dot">.</span><small>свежо и близо до теб</small></span></a><p>Хубавите неща са съвсем близо.</p><span>© 2026 Лавка · Направено с ♥ в България</span></div></footer>
+  <div class="overlay" id="overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Твоята количка" aria-hidden="true"><div class="drawer-header"><div><span class="eyebrow">ТВОЯТА ПОКУПКА</span><h2>Количка <span id="drawer-count">(0)</span></h2></div><button class="icon-button" id="close-cart" aria-label="Затвори количката">×</button></div><div class="cart-items" id="cart-items"></div><div class="cart-empty" id="cart-empty"><span>🧺</span><h3>Количката ти е празна</h3><p>Добави нещо вкусно и се връщай насам.</p><button class="secondary-button" id="continue-shopping">Разгледай продуктите</button></div><div class="cart-footer hidden" id="cart-footer"><div class="delivery-hint" id="delivery-hint"></div><div class="subtotal"><span>Общо</span><strong id="cart-total">0,00 лв.</strong></div><button class="primary-button checkout-button" id="checkout-button">Продължи към поръчка <span>→</span></button><small>Доставката се уточнява при потвърждение.</small></div></aside>
+  <dialog class="checkout-dialog" id="checkout-dialog"><form id="checkout-form"><button type="button" class="icon-button dialog-close" id="close-checkout" aria-label="Затвори">×</button><span class="eyebrow">ПОСЛЕДНА СТЪПКА</span><h2>Къде да донесем<br>хубавите неща?</h2><p>Попълни данните си — ще се свържем за потвърждение на поръчката.</p><label>Име и фамилия<input name="name" required minlength="2" placeholder="Например: Мария Иванова"></label><label>Телефон<input name="phone" required type="tel" pattern="[+0-9 ()-]{8,}" placeholder="08xx xxx xxx"></label><label>Адрес за доставка<input name="address" required minlength="5" placeholder="Улица, номер, вход"></label><button class="primary-button checkout-submit" type="submit">Изпрати поръчката <span>→</span></button><small class="demo-note">Демо поръчка — няма да бъдат таксувани средства.</small></form><div class="order-success hidden" id="order-success"><span>🎉</span><h2>Поръчката е приета!</h2><p>Благодарим ти! Това е демонстрационен магазин — поръчката не е изпратена реално.</p><button class="primary-button" id="finish-order">Чудесно!</button></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
