@@ -1,0 +1,16 @@
+{
+  "products": [
+    {"id":"strawberries","name":"Български ягоди","category":"Плодове и зеленчуци","categoryId":"fresh","price":3.49,"unit":"250 г","badge":"БЪЛГАРСКИ ПРОДУКТ","image":"https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=700&q=80"},
+    {"id":"tomatoes","name":"Розови домати","category":"Плодове и зеленчуци","categoryId":"fresh","price":2.99,"unit":"кг","badge":"СЕЗОННО","image":"https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=700&q=80"},
+    {"id":"avocado","name":"Авокадо Хас","category":"Плодове и зеленчуци","categoryId":"fresh","price":1.79,"unit":"бр.","badge":"ЛЮБИМ ИЗБОР","image":"https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=700&q=80"},
+    {"id":"sourdough","name":"Хляб с квас","category":"Хляб и печива","categoryId":"bakery","price":2.69,"unit":"400 г","badge":"ПРЯСНО ИЗПЕЧЕН","image":"https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=700&q=80"},
+    {"id":"milk","name":"Прясно мляко 3.6%","category":"Млечни продукти","categoryId":"dairy","price":1.69,"unit":"1 л","badge":"ФЕРМЕРСКО","image":"https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=700&q=80"},
+    {"id":"cheese","name":"Бяло саламурено сирене","category":"Млечни продукти","categoryId":"dairy","price":4.89,"unit":"400 г","badge":"ТРАДИЦИОНЕН ВКУС","image":"https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=700&q=80"},
+    {"id":"honey","name":"Планински пчелен мед","category":"Основни храни","categoryId":"pantry","price":5.49,"unit":"350 г","badge":"ПОДБРАНО","image":"https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=700&q=80"},
+    {"id":"coffee","name":"Кафе на зърна","category":"Напитки","categoryId":"drinks","price":7.99,"unit":"250 г","badge":"АРАБИКА","image":"https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80"},
+    {"id":"apples","name":"Червени ябълки","category":"Плодове и зеленчуци","categoryId":"fresh","price":1.89,"unit":"кг","badge":"СВЕЖО","image":"https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=700&q=80"},
+    {"id":"olive-oil","name":"Студено пресован зехтин","category":"Основни храни","categoryId":"pantry","price":8.49,"unit":"500 мл","badge":"СРЕДИЗЕМНОМОРСКИ","image":"https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=700&q=80"},
+    {"id":"croissant","name":"Маслен кроасан","category":"Хляб и печива","categoryId":"bakery","price":1.29,"unit":"бр.","badge":"ПРЯСНО ИЗПЕЧЕН","image":"https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80"},
+    {"id":"oranges","name":"Сочни портокали","category":"Плодове и зеленчуци","categoryId":"fresh","price":2.19,"unit":"кг","badge":"СЕЗОННО","image":"https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=700&q=80"}
+  ]
+}

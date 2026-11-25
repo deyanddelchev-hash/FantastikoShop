@@ -1,88 +1,169 @@
-const products = [
-  {id:'strawberries',name:'Български ягоди',category:'Плодове и зеленчуци',categoryId:'fresh',price:3.49,unit:'250 г',badge:'БЪЛГАРСКИ ПРОДУКТ',image:'https://images.unsplash.com/photo- strawberries?auto=format&fit=crop&w=700&q=80',emoji:'🍓'},
-  {id:'tomatoes',name:'Розови домати',category:'Плодове и зеленчуци',categoryId:'fresh',price:2.99,unit:'кг',badge:'СЕЗОННО',image:'https://images.unsplash.com/photo-1546094096-0df4bcaaa337?auto=format&fit=crop&w=700&q=80',emoji:'🍅'},
-  {id:'avocado',name:'Авокадо Хас',category:'Плодове и зеленчуци',categoryId:'fresh',price:1.79,unit:'бр.',badge:'ЛЮБИМ ИЗБОР',image:'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=700&q=80',emoji:'🥑'},
-  {id:'sourdough',name:'Хляб с квас',category:'Хляб и печива',categoryId:'bakery',price:2.69,unit:'400 г',badge:'ПРЯСНО ИЗПЕЧЕН',image:'https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=700&q=80',emoji:'🥖'},
-  {id:'milk',name:'Прясно мляко 3.6%',category:'Млечни продукти',categoryId:'dairy',price:1.69,unit:'1 л',badge:'ФЕРМЕРСКО',image:'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=700&q=80',emoji:'🥛'},
-  {id:'cheese',name:'Бяло саламурено сирене',category:'Млечни продукти',categoryId:'dairy',price:4.89,unit:'400 г',badge:'ТРАДИЦИОНЕН ВКУС',image:'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=700&q=80',emoji:'🧀'},
-  {id:'honey',name:'Планински пчелен мед',category:'Основни храни',categoryId:'pantry',price:5.49,unit:'350 г',badge:'ПОДБРА��О',image:'https://images.unsplash.com/photo-1587049352851-8d4e89133924?auto=format&fit=crop&w=700&q=80',emoji:'🍯'},
-  {id:'coffee',name:'Кафе на зърна',category:'Напитки',categoryId:'drinks',price:7.99,unit:'250 г',badge:'АРАБИКА',image:'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=700&q=80',emoji:'☕'},
-  {id:'apples',name:'Червени ябълки',category:'Плодове и зеленчуци',categoryId:'fresh',price:1.89,unit:'кг',badge:'СВЕЖО',image:'https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?auto=format&fit=crop&w=700&q=80',emoji:'🍎'},
-  {id:'olive-oil',name:'Студено пресован зехтин',category:'Основни храни',categoryId:'pantry',price:8.49,unit:'500 мл',badge:'СРЕДИЗЕМНОМОРСКИ',image:'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=700&q=80',emoji:'🫒'},
-  {id:'croissant',name:'Маслен кроасан',category:'Хляб и печива',categoryId:'bakery',price:1.29,unit:'бр.',badge:'ПРЯСНО ИЗПЕЧЕН',image:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=700&q=80',emoji:'🥐'},
-  {id:'oranges',name:'Сочни портокали',category:'Плодове и зеленчуци',categoryId:'fresh',price:2.19,unit:'кг',badge:'СЕЗОННО',image:'https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=700&q=80',emoji:'🍊'}
-];
 const categories = [
-  {id:'fresh',name:'Плодове и зеленчуци',count:'Свежо всеки ден',emoji:'🥑',color:'#eff5e9'},
-  {id:'dairy',name:'Млечни продукти',count:'Вкус от природата',emoji:'🧀',color:'#fff4dc'},
-  {id:'bakery',name:'Хляб и печива',count:'Току-що изпечени',emoji:'🥐',color:'#f9ece1'},
-  {id:'pantry',name:'Основни храни',count:'За всяка кухня',emoji:'🫙',color:'#f1eefa'},
-  {id:'drinks',name:'Напитки',count:'От сутрин до вечер',emoji:'☕',color:'#eaf1f5'},
-  {id:'all',name:'Всички продукти',count:'Разгледай всичко',emoji:'🛒',color:'#f7ecee'}
+  { id: 'fresh', name: 'Плодове и зеленчуци', count: 'Свежо всеки ден', emoji: '🥑', color: '#eff5e9' },
+  { id: 'dairy', name: 'Млечни продукти', count: 'Вкус от природата', emoji: '🧀', color: '#fff4dc' },
+  { id: 'bakery', name: 'Хляб и печива', count: 'Току-що изпечени', emoji: '🥐', color: '#f9ece1' },
+  { id: 'pantry', name: 'Основни храни', count: 'За всяка кухня', emoji: '🫙', color: '#f1eefa' },
+  { id: 'drinks', name: 'Напитки', count: 'От сутрин до вечер', emoji: '☕', color: '#eaf1f5' },
+  { id: 'all', name: 'Всички продукти', count: 'Разгледай всичко', emoji: '🛒', color: '#f7ecee' }
 ];
-const STORAGE_KEY='fantastiko-demo-cart-v1';
-const $=selector=>document.querySelector(selector);
-const money=value=>`${value.toFixed(2).replace('.',',')} €`;
-let activeCategory='all';
-let searchTerm='';
+const STORAGE_KEY = 'lavka-cart-v2';
+const $ = selector => document.querySelector(selector);
+const money = value => `${Number(value).toFixed(2).replace('.', ',')} €`;
+let products = [];
+let activeCategory = 'all';
+let searchTerm = '';
 let toastTimer;
-let cart=loadCart();
-function loadCart(){try{const value=JSON.parse(localStorage.getItem(STORAGE_KEY));return value&&typeof value==='object'?value:{}}catch{return {}}}
-function saveCart(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(cart))}catch{}renderCart()}
-function renderCategories(){
-  $('#category-list').innerHTML=categories.map(item=>`<button class="category-card ${activeCategory===item.id?'active':''}" data-category="${item.id}" type="button"><span class="category-art" style="background:${item.color}">${item.emoji}</span><b>${item.name}</b><small>${item.count}</small></button>`).join('');
-  document.querySelectorAll('[data-category]').forEach(button=>button.addEventListener('click',()=>{activeCategory=button.dataset.category;renderCategories();renderProducts();$('#products').scrollIntoView({behavior:'smooth'})}));
+let cart = loadCart();
+
+function loadCart() {
+  try { const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); return saved && typeof saved === 'object' ? saved : {}; }
+  catch { return {}; }
 }
-function getVisibleProducts(){
-  const term=searchTerm.toLocaleLowerCase('bg');
-  let visible=products.filter(product=>(activeCategory==='all'||product.categoryId===activeCategory)&&(!term||`${product.name} ${product.category} ${product.badge}`.toLocaleLowerCase('bg').includes(term)));
-  const sort=$('#sort-select').value;
-  if(sort==='price-asc')visible=visible.sort((a,b)=>a.price-b.price);
-  if(sort==='price-desc')visible=visible.sort((a,b)=>b.price-a.price);
-  return visible;
+function saveCart() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch {}
+  renderCart();
 }
-function renderProducts(){
-  const visible=getVisibleProducts();
-  $('#product-grid').innerHTML=visible.map(product=>`<article class="product-card"><div class="product-image"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.outerHTML='<span class=\'fallback-emoji\' aria-hidden=\'true\'>${product.emoji}</span>'"><span class="product-badge">${product.badge}</span></div><div class="product-info"><span class="product-category">${product.category}</span><h3 class="product-name">${product.name}</h3><div class="product-bottom"><div><strong class="product-price">${money(product.price)}</strong><small class="product-unit">за ${product.unit}</small></div><button class="add-button" type="button" data-add="${product.id}" aria-label="Добави ${product.name} в количката">+</button></div></div></article>`).join('');
-  $('#empty-state').classList.toggle('hidden',visible.length>0);
-  $('#product-grid').classList.toggle('hidden',visible.length===0);
-  $('#active-filter').innerHTML=activeCategory!=='all'?`<button class="filter-chip" id="clear-filter" type="button">${categories.find(c=>c.id===activeCategory)?.name||'Категория'} ×</button>`:'';
-  $('#clear-filter')?.addEventListener('click',()=>{activeCategory='all';renderCategories();renderProducts()});
-  document.querySelectorAll('[data-add]').forEach(button=>button.addEventListener('click',()=>addToCart(button.dataset.add)));
+function renderCategories() {
+  const target = $('#category-list');
+  if (!target) return;
+  target.innerHTML = categories.map(item => `<button class="category-card ${activeCategory === item.id ? 'active' : ''}" data-category="${item.id}" type="button"><span class="category-art" style="background:${item.color}" aria-hidden="true">${item.emoji}</span><span class="category-copy"><strong>${item.name}</strong><small>${item.count}</small></span></button>`).join('');
 }
-function addToCart(id){cart[id]=(cart[id]||0)+1;saveCart();const product=products.find(item=>item.id===id);showToast(`${product.name} е добавен в количката`)}
-function changeQuantity(id,amount){cart[id]=(cart[id]||0)+amount;if(cart[id]<=0)delete cart[id];saveCart()}
-function renderCart(){
-  const entries=Object.entries(cart).filter(([id,qty])=>products.some(product=>product.id===id)&&Number.isFinite(qty)&&qty>0);
-  cart=Object.fromEntries(entries);
-  const count=entries.reduce((sum,[,qty])=>sum+qty,0);
-  const total=entries.reduce((sum,[id,qty])=>sum+products.find(product=>product.id===id).price*qty,0);
-  $('#cart-count').textContent=count;$('#drawer-count').textContent=`(${count})`;
-  $('#cart-items').innerHTML=entries.map(([id,qty])=>{const product=products.find(item=>item.id===id);return `<article class="cart-item"><div class="cart-item-art"><img src="${product.image}" alt="" onerror="this.outerHTML='<span>${product.emoji}</span>'"></div><div><h3>${product.name}</h3><span class="cart-item-price">${money(product.price)} / ${product.unit}</span><div class="quantity-control"><button type="button" data-change="${id}" data-amount="-1" aria-label="Намали количеството">−</button><span>${qty}</span><button type="button" data-change="${id}" data-amount="1" aria-label="Увеличи количеството">+</button></div></div><strong>${money(product.price*qty)}</strong></article>`}).join('');
-  $('#cart-empty').classList.toggle('hidden',count>0);$('#cart-footer').classList.toggle('hidden',count===0);$('#cart-total').textContent=money(total);
-  $('#delivery-hint').textContent=`Поръчката е демонстрационна. Общо за продуктите: ${money(total)}.`;
-  document.querySelectorAll('[data-change]').forEach(button=>button.addEventListener('click',()=>changeQuantity(button.dataset.change,Number(button.dataset.amount))));
+function visibleProducts() {
+  const term = searchTerm.toLocaleLowerCase('bg');
+  let result = products.filter(product => (activeCategory === 'all' || product.categoryId === activeCategory) && (!term || `${product.name} ${product.category} ${product.badge}`.toLocaleLowerCase('bg').includes(term)));
+  const sort = $('#sort-select')?.value;
+  if (sort === 'price-asc') result = result.sort((a, b) => a.price - b.price);
+  if (sort === 'price-desc') result = result.sort((a, b) => b.price - a.price);
+  return result;
 }
-function showCart(){closeCheckout();$('#cart-drawer').classList.add('open');$('#cart-drawer').setAttribute('aria-hidden','false');$('#overlay').classList.add('open');document.body.style.overflow='hidden';$('#close-cart').focus()}
-function hideCart(){$('#cart-drawer').classList.remove('open');$('#cart-drawer').setAttribute('aria-hidden','true');$('#overlay').classList.remove('open');document.body.style.overflow='';$('#open-cart').focus()}
-function showCheckout(){if(!Object.keys(cart).length)return;hideCart();$('#order-success').classList.add('hidden');$('#checkout-form').classList.remove('hidden');$('#checkout-dialog').showModal()}
-function closeCheckout(){if($('#checkout-dialog').open)$('#checkout-dialog').close()}
-function showToast(message){const toast=$('#toast');toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove('show'),2200)}
-$('#search-form').addEventListener('submit',event=>{event.preventDefault();searchTerm=$('#search-input').value.trim();renderProducts();$('#products').scrollIntoView({behavior:'smooth'})});
-$('#search-input').addEventListener('input',event=>{searchTerm=event.target.value.trim();renderProducts()});
-$('#sort-select').addEventListener('change',renderProducts);
-document.querySelectorAll('[data-nav-category]').forEach(link=>link.addEventListener('click',()=>{activeCategory=link.dataset.navCategory;renderCategories();renderProducts()}));
-$('.nav-all').addEventListener('click',()=>{activeCategory='all';renderCategories();renderProducts()});
-$('#open-cart').addEventListener('click',showCart);
-$('#close-cart').addEventListener('click',hideCart);
-$('#overlay').addEventListener('click',hideCart);
-$('#continue-shopping').addEventListener('click',hideCart);
-$('#checkout-button').addEventListener('click',showCheckout);
-$('#close-checkout').addEventListener('click',closeCheckout);
-$('#checkout-dialog').addEventListener('click',event=>{if(event.target===$('#checkout-dialog'))closeCheckout()});
-$('#checkout-form').addEventListener('submit',event=>{event.preventDefault();if(!event.currentTarget.reportValidity())return;cart={};saveCart();event.currentTarget.classList.add('hidden');$('#order-success').classList.remove('hidden')});
-$('#finish-order').addEventListener('click',closeCheckout);
-$('#reset-filters').addEventListener('click',()=>{$('#search-input').value='';searchTerm='';activeCategory='all';renderCategories();renderProducts()});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('#checkout-dialog').open&&$('#cart-drawer').classList.contains('open'))hideCart();if((event.metaKey||event.ctrlKey)&&event.key.toLowerCase()==='k'){event.preventDefault();$('#search-input').focus()}});
-$('#current-year').textContent=new Date().getFullYear();
-renderCategories();renderProducts();renderCart();
+function renderProducts() {
+  const grid = $('#product-grid');
+  if (!grid) return;
+  const visible = visibleProducts();
+  grid.innerHTML = visible.map(product => `<article class="product-card"><div class="product-image"><img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.style.display='none'"><span class="product-badge">${product.badge}</span></div><div class="product-info"><small>${product.category}</small><h3>${product.name}</h3><span class="product-unit">${product.unit}</span><div class="product-bottom"><strong>${money(product.price)}</strong><button class="add-button" data-add="${product.id}" type="button" aria-label="Добави ${product.name} в количката">+</button></div></div></article>`).join('');
+  $('#empty-state')?.classList.toggle('hidden', visible.length > 0);
+  grid.classList.toggle('hidden', visible.length === 0);
+  const active = $('#active-filter');
+  if (active) active.innerHTML = activeCategory !== 'all' ? `<button class="filter-chip" id="clear-filter" type="button">${categories.find(item => item.id === activeCategory)?.name || 'Категория'} ×</button>` : '';
+}
+function addToCart(id) {
+  if (!products.some(product => product.id === id)) return;
+  cart[id] = Math.min(99, (Number(cart[id]) || 0) + 1);
+  saveCart();
+  showToast(`${products.find(product => product.id === id).name} е добавен в количката`);
+}
+function changeQuantity(id, amount) {
+  cart[id] = (Number(cart[id]) || 0) + amount;
+  if (cart[id] <= 0) delete cart[id];
+  saveCart();
+}
+function cartEntries() {
+  return Object.entries(cart).filter(([id, quantity]) => products.some(product => product.id === id) && Number.isInteger(quantity) && quantity > 0);
+}
+function renderCart() {
+  cart = Object.fromEntries(cartEntries());
+  const entries = cartEntries();
+  const count = entries.reduce((sum, [, quantity]) => sum + quantity, 0);
+  const total = entries.reduce((sum, [id, quantity]) => sum + products.find(product => product.id === id).price * quantity, 0);
+  if ($('#cart-count')) $('#cart-count').textContent = count;
+  if ($('#drawer-count')) $('#drawer-count').textContent = `(${count})`;
+  if ($('#cart-items')) $('#cart-items').innerHTML = entries.map(([id, quantity]) => {
+    const product = products.find(item => item.id === id);
+    return `<article class="cart-item"><div class="cart-item-art"><img src="${product.image}" alt=""></div><div class="cart-item-info"><strong>${product.name}</strong><small>${money(product.price)} / ${product.unit}</small><div class="quantity-control"><button type="button" data-change="${id}" data-amount="-1" aria-label="Намали">−</button><span>${quantity}</span><button type="button" data-change="${id}" data-amount="1" aria-label="Увеличи">+</button></div></div><strong>${money(product.price * quantity)}</strong></article>`;
+  }).join('');
+  $('#cart-empty')?.classList.toggle('hidden', count > 0);
+  $('#cart-footer')?.classList.toggle('hidden', count === 0);
+  if ($('#cart-total')) $('#cart-total').textContent = money(total);
+  const hint = $('#delivery-hint');
+  if (hint) hint.textContent = count ? `Сумата се преизчислява от магазина при поръчка. Междинна сума: ${money(total)}.` : '';
+}
+function showCart() {
+  closeCheckout();
+  $('#cart-drawer')?.classList.add('open');
+  $('#cart-drawer')?.setAttribute('aria-hidden', 'false');
+  $('#overlay')?.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function hideCart() {
+  $('#cart-drawer')?.classList.remove('open');
+  $('#cart-drawer')?.setAttribute('aria-hidden', 'true');
+  $('#overlay')?.classList.remove('open');
+  document.body.style.overflow = '';
+}
+function showCheckout() {
+  if (!cartEntries().length) return;
+  hideCart();
+  const form = $('#checkout-form');
+  $('#order-success')?.classList.add('hidden');
+  form.classList.remove('hidden');
+  form.innerHTML = `<button class="icon-button dialog-close" id="close-checkout" type="button" aria-label="Затвори">×</button><span class="eyebrow">ДОСТАВКА ДО ВРАТАТА</span><h2>Данни за поръчката</h2><p class="checkout-intro">Попълни данните си. Ще запазим поръчката и ще ти покажем номера ѝ.</p><div class="checkout-fields"><label>Име и фамилия<input name="name" autocomplete="name" required minlength="2" maxlength="100"></label><label>Имейл<input name="email" type="email" autocomplete="email" required maxlength="160"></label><label>Телефон<input name="phone" type="tel" autocomplete="tel" required minlength="7" maxlength="40" placeholder="Напр. 0888 123 456"></label><label>Населено място<input name="city" autocomplete="address-level2" required maxlength="100"></label><label class="field-wide">Адрес за доставка<input name="address" autocomplete="street-address" required minlength="5" maxlength="200" placeholder="Улица, номер, вход, етаж"></label><label>Пощенски код <span class="optional">(по желание)</span><input name="postalCode" autocomplete="postal-code" maxlength="20"></label><label>Предпочитан час <span class="optional">(по желание)</span><select name="deliverySlot"><option value="">Ще се уточни по телефона</option><option>09:00 – 12:00</option><option>12:00 – 15:00</option><option>15:00 – 18:00</option><option>18:00 – 21:00</option></select></label><label class="field-wide">Бележка към поръчката <span class="optional">(по желание)</span><textarea name="notes" rows="3" maxlength="500"></textarea></label></div><p class="checkout-total">Междинна сума: <strong>${money(cartEntries().reduce((sum, [id, qty]) => sum + products.find(p => p.id === id).price * qty, 0))}</strong></p><p class="checkout-notice">Плащането и часът за доставка се уточняват с магазина по телефона. Онлайн плащане още не е настроено.</p><button class="primary-button checkout-submit" type="submit">Изпрати поръчката</button>`;
+  $('#checkout-dialog').showModal();
+}
+function closeCheckout() { const dialog = $('#checkout-dialog'); if (dialog?.open) dialog.close(); }
+function showToast(message) {
+  const toast = $('#toast'); if (!toast) return;
+  toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+$('#search-form')?.addEventListener('submit', event => { event.preventDefault(); searchTerm = $('#search-input').value.trim(); renderProducts(); $('#products')?.scrollIntoView({ behavior: 'smooth' }); });
+$('#search-input')?.addEventListener('input', event => { searchTerm = event.target.value.trim(); renderProducts(); });
+$('#sort-select')?.addEventListener('change', renderProducts);
+$('#open-cart')?.addEventListener('click', showCart);
+$('#close-cart')?.addEventListener('click', hideCart);
+$('#overlay')?.addEventListener('click', hideCart);
+$('#continue-shopping')?.addEventListener('click', hideCart);
+$('#checkout-button')?.addEventListener('click', showCheckout);
+$('#close-checkout')?.addEventListener('click', closeCheckout);
+$('#checkout-dialog')?.addEventListener('click', event => { if (event.target === $('#checkout-dialog')) closeCheckout(); });
+$('#checkout-form')?.addEventListener('submit', async event => {
+  event.preventDefault();
+  const form = event.currentTarget;
+  if (!form.reportValidity()) return;
+  const submit = form.querySelector('[type="submit"]');
+  submit.disabled = true; submit.textContent = 'Изпращане…';
+  const customer = Object.fromEntries(new FormData(form).entries());
+  const items = cartEntries().map(([id, quantity]) => ({ id, quantity }));
+  try {
+    const response = await fetch('/api/orders', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ customer, items }) });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'Поръчката не можа да бъде изпратена.');
+    cart = {}; saveCart(); form.classList.add('hidden');
+    const success = $('#order-success');
+    success.innerHTML = `<div class="success-mark" aria-hidden="true">✓</div><span class="eyebrow">ПОРЪЧКАТА Е ЗАПИСАНА</span><h2>Благодарим ти!</h2><p>Номер на поръчката: <strong>${result.orderId}</strong></p><p>Магазинът ще се свърже с теб за потвърждение и уточняване на доставката.</p><button class="primary-button" id="finish-order" type="button">Готово</button>`;
+    success.classList.remove('hidden');
+    $('#finish-order').addEventListener('click', closeCheckout);
+  } catch (error) {
+    showToast(error.message || 'Няма връзка със сървъра. Опитай отново.');
+    submit.disabled = false; submit.textContent = 'Изпрати поръчката';
+  }
+});
+$('#reset-filters')?.addEventListener('click', () => { if ($('#search-input')) $('#search-input').value = ''; searchTerm = ''; activeCategory = 'all'; renderCategories(); renderProducts(); });
+document.addEventListener('click', event => {
+  const category = event.target.closest('[data-category], [data-nav-category], .nav-all');
+  if (category) {
+    activeCategory = category.dataset.category || category.dataset.navCategory || 'all';
+    renderCategories(); renderProducts();
+  }
+  const add = event.target.closest('[data-add]'); if (add) addToCart(add.dataset.add);
+  const change = event.target.closest('[data-change]'); if (change) changeQuantity(change.dataset.change, Number(change.dataset.amount));
+  if (event.target.closest('#clear-filter')) { activeCategory = 'all'; renderCategories(); renderProducts(); }
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && !$('#checkout-dialog')?.open && $('#cart-drawer')?.classList.contains('open')) hideCart();
+  if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') { event.preventDefault(); $('#search-input')?.focus(); }
+});
+if ($('#current-year')) $('#current-year').textContent = new Date().getFullYear();
+
+async function start() {
+  try {
+    const response = await fetch('/api/products');
+    if (!response.ok) throw new Error('Сървърът не върна каталога.');
+    ({ products } = await response.json());
+    renderCategories(); renderProducts(); renderCart();
+  } catch (error) {
+    const grid = $('#product-grid');
+    if (grid) grid.innerHTML = `<p role="alert">Не успяхме да заредим магазина. Стартирай го с <code>npm start</code> и отвори <code>http://localhost:3000</code>.</p>`;
+  }
+}
+start();

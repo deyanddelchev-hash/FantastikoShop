@@ -1,0 +1,8 @@
+{
+  "name": "lavka-online-shop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Работеща основа за онлайн магазин Лавка с каталог и приемане на поръчки.",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}
